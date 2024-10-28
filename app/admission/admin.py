@@ -1,4 +1,5 @@
 # admission/admin.py
+
 from django.contrib import admin
 from .models import (
     PersonalInfo,
@@ -6,9 +7,8 @@ from .models import (
     AcademicInfo,
     FinancialInfo,
     AdditionalInfo,
-    Admission,
-    Religion,  # Ensure these are imported if used in models
-    Nationality,
+    Admission,Occupation
+    
 )
 
 # Admin classes for better presentation and functionality
@@ -36,9 +36,13 @@ class AdditionalInfoAdmin(admin.ModelAdmin):
     search_fields = ('sibling', 'other_information')
 
 class AdmissionAdmin(admin.ModelAdmin):
-    list_display = ('admission_no', 'personal_info', 'admission_confirmation_date', 'admission_type')
-    search_fields = ('admission_no', 'personal_info__full_name')
-    list_filter = ('admission_type', 'admission_confirmation_date')
+    list_display = ( 'personal_info', )
+    search_fields = ( 'personal_info__full_name',)
+
+class OccupationAdmin(admin.ModelAdmin):
+    list_display=('name',)
+    search_fields=('name',)
+    list_filter=('name',)
 
 # Registering the models with the admin site
 admin.site.register(PersonalInfo, PersonalInfoAdmin)
@@ -47,7 +51,6 @@ admin.site.register(AcademicInfo, AcademicInfoAdmin)
 admin.site.register(FinancialInfo, FinancialInfoAdmin)
 admin.site.register(AdditionalInfo, AdditionalInfoAdmin)
 admin.site.register(Admission, AdmissionAdmin)
+admin.site.register(Occupation,OccupationAdmin)
 
-# If these models are in your common app
-# admin.site.register(Religion)
-# admin.site.register(Nationality)
+
